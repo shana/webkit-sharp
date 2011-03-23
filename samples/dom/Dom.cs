@@ -1,10 +1,6 @@
+// Author: Andreia Gaita <shana@spoiledcat.net>
 //
-// WebKit# - WebKit bindings for Mono
-//
-// Author: 
-//   Everaldo Canuto <ecanuto@novell.com>
-//
-// Copyright (c) 2008 Novell, Inc. All rights reserved.
+// Copyright (c) 2011 Novell, Inc. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,8 +27,9 @@ using System;
 using Gtk;
 using GtkSharp;
 using WebKit;
+using System.Runtime.InteropServices;
 
-namespace FunnyBrowser
+namespace Dom
 {
 	public class MainClass
 	{
@@ -49,15 +46,17 @@ namespace FunnyBrowser
 
 	public class MainWindow: Gtk.Window
 	{
-		const string APP_NAME = "FunnyBrowser";
+		const string APP_NAME = "Dom";
 
-		private string url = "http://www.google.com/";
+		private string url = "http://moon.sublimeintervention.com/ViewLane.aspx?lane_id=4&host_id=18&revision_id=12446";
 		
 		private Gtk.VBox vbox = null;
 		private Gtk.Toolbar toolbar = null;
 		private Gtk.Toolbar findbar = null;
+		private Gtk.Toolbar exprbar = null;
 		private Gtk.Entry uri_entry = null;
 		private Gtk.Entry find_entry = null;
+		private Gtk.Entry expr_entry = null;
 		private WebKit.WebView webview = null;
 		private Gtk.Statusbar statusbar = null;
 		
@@ -66,6 +65,7 @@ namespace FunnyBrowser
 		private Gtk.Action action_reload;
 		private Gtk.Action action_stop;
 		private Gtk.Action action_jump;
+		private Gtk.Action action_expr;
 
 		public MainWindow (string url): base (Gtk.WindowType.Toplevel)
 		{
@@ -84,6 +84,7 @@ namespace FunnyBrowser
 
 			CreateActions ();
 			CreateToolbar ();
+			CreateExprBar ();
 			CreateWebView ();
 			CreateFindbar ();
 			CreateStatusBar ();
@@ -93,6 +94,7 @@ namespace FunnyBrowser
 
 			vbox = new Gtk.VBox (false, 1);
 			vbox.PackStart (toolbar, false, false, 0);
+			vbox.PackStart (exprbar, false, false, 0);
 			vbox.PackStart (scroll);
 			//vbox.PackStart (findbar, false, false, 0);
 			vbox.PackEnd (statusbar, false, true, 0);
@@ -108,12 +110,14 @@ namespace FunnyBrowser
 			action_reload  = new Gtk.Action("reload",     "Reload",     null, "gtk-refresh");
 			action_stop    = new Gtk.Action("stop",       "Stop",       null, "gtk-stop");
 			action_jump    = new Gtk.Action("jump",       "Jump",       null, "gtk-jump-to");
+			action_expr    = new Gtk.Action("eval",       "Eval",       null, "gtk-jump-to");
 
 			action_back.Activated    += new EventHandler(on_back_activate);
 			action_forward.Activated += new EventHandler(on_forward_activate);
 			action_reload.Activated  += new EventHandler(on_reload_activate);
 			action_stop.Activated    += new EventHandler(on_stop_activate);
 			action_jump.Activated    += new EventHandler(on_uri_activate);
+			action_expr.Activated    += new EventHandler(on_expr_activate);
 		}
 		
 		private void CreateToolbar ()
@@ -141,18 +145,58 @@ namespace FunnyBrowser
 			toolbar.Add (action_jump.CreateToolItem());
 		}
 
+		private void CreateExprBar ()
+		{
+			// UrlEntry
+			expr_entry = new Gtk.Entry ();
+			expr_entry.Activated += new EventHandler(on_expr_activate);
+
+			Gtk.ToolItem expr_item = new Gtk.ToolItem ();
+			expr_item.Expand = true;
+			expr_item.Add (expr_entry);
+
+			// Toolbar
+			exprbar = new Toolbar ();
+			exprbar.ToolbarStyle = ToolbarStyle.Icons;
+			exprbar.Orientation = Orientation.Horizontal;
+			exprbar.ShowArrow = true;
+
+			// Toolbar Itens
+			exprbar.Add (expr_item);
+			exprbar.Add (action_expr.CreateToolItem());
+		}
+
+		[DllImport("webkitgtk-1.0")]
+		static extern IntPtr webkit_web_view_get_main_frame(IntPtr raw);
+
 		private void CreateWebView ()
 		{
 			webview = new WebView ();
 			webview.Editable = false;
 			webview.TitleChanged += new TitleChangedHandler (OnTitleChanged);
 			webview.HoveringOverLink += new HoveringOverLinkHandler (OnHoveringOverLink);
-			webview.LoadCommitted += new LoadCommittedHandler (OnLoadCommitted);
-			webview.LoadFinished += new LoadFinishedHandler (OnLoadFinished);
-			webview.LoadStatusChanged += delegate {
-				Console.WriteLine (args.Status);
-			};
 
+			webview.LoadStatusChanged += delegate {
+/*
+				Console.WriteLine (webview.LoadStatus);
+				IntPtr raw_ret = webkit_web_view_get_main_frame(webview.Handle);
+				Console.WriteLine ("0x{0:x}", (int)raw_ret);
+				GLib.ObjectManager.RegisterType (raw_ret, typeof (WebKit.WebFrame));
+				WebKit.WebFrame ret = GLib.Object.GetObject(raw_ret) as WebKit.WebFrame;
+				Console.WriteLine (ret);
+*/
+
+				Console.WriteLine (webview.LoadStatus);
+				WebFrame frame = webview.MainFrame;
+				Console.WriteLine (frame);
+				if (frame != null)
+					Console.WriteLine (frame.Uri);
+//				if (webview.LoadStatus == LoadStatus.committed) {
+					if (frame != null && !String.IsNullOrEmpty (frame.Uri))
+						uri_entry.Text = frame.Uri;
+//				}
+
+			};
 		}
 
 		private void CreateStatusBar ()
@@ -210,7 +254,7 @@ namespace FunnyBrowser
 			action_back.Sensitive = webview.CanGoBack ();
 			action_forward.Sensitive = webview.CanGoForward ();
 
-			uri_entry.Text = args.Frame.Uri;
+//			uri_entry.Text = args.Frame.Uri;
 		}
 
 		private void OnLoadFinished (object o, LoadFinishedArgs args)
@@ -241,6 +285,20 @@ namespace FunnyBrowser
 		private void on_uri_activate (object o, EventArgs args)
 		{
 			webview.Open (uri_entry.Text);
+		}
+
+		private void on_expr_activate (object o, EventArgs args)
+		{
+			string ex = expr_entry.Text;
+			DOMDocument doc = webview.DomDocument;
+			Console.WriteLine (doc);
+			DOMNodeList nodes = doc.GetElementsByTagName("a");
+			
+			ulong l = nodes.Length;
+			for (ulong i = 0; i < l; i++) {
+				DOMHTMLAnchorElement a = nodes.Item (i) as DOMHTMLAnchorElement;
+				Console.WriteLine ("Node {0}", a.Href);
+			}
 		}
 	}
 }

@@ -155,6 +155,7 @@ AC_CONFIG_FILES([
 	webkit-sharp.spec
 	doc/Makefile
 	samples/Makefile
+	samples/dom/Makefile
 	sources/Makefile
 	sources/AssemblyInfo.cs
 	sources/webkit-sharp-1.0.pc:sources/webkit-sharp.pc.in
