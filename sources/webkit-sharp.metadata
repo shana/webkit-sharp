@@ -1,110 +1,14 @@
 <?xml version="1.0"?>
-<!-- TODO: navigation-requested -->
 <metadata>
 
-	<!-- Add missing signal in WebView -->
 	<add-node path="/api/namespace/object[@cname='WebKitWebView']">
-
-		<signal name="NavigationRequested" cname="navigation-requested" when="LAST">
-			<return-type type="gint" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitWebFrame*" name="frame" />
-				<parameter type="WebKitNetworkRequest" name="request" />
-			</parameters>
-		</signal>
-
-		<signal name="WindowObjectCleared" cname="window-object-cleared" when="LAST">
+		<signal name="LoadStatusChanged" cname="notify::load-status" when="LAST">
 			<return-type type="void" />
 			<parameters>
 				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitWebFrame*" name="frame" />
-				<parameter type="gpointer" name="context" /> <!-- TODO: check the right type -->
-				<parameter type="gpointer" name="window_object" /> <!-- TODO: check the right type -->
+				<parameter type="WebKitLoadStatus*" name="status" />
 			</parameters>
 		</signal>
-
-		<signal name="LoadStarted" cname="load-started" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitWebFrame*" name="frame" />
-			</parameters>
-		</signal>
-
-		<signal name="LoadCommitted" cname="load-committed" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitWebFrame*" name="frame" />
-			</parameters>
-		</signal>
-
-		<signal name="LoadProgressChanged" cname="load-progress-changed" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="gint" name="progress" />
-			</parameters>
-		</signal>
-
-		<signal name="LoadFinished" cname="load-finished" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitWebFrame*" name="frame" />
-			</parameters>
-		</signal>
-
-		<signal name="TitleChanged" cname="title-changed" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitWebFrame*" name="frame" />
-				<parameter type="const-gchar*" name="title" />
-			</parameters>
-		</signal>
-
-		<signal name="HoveringOverLink" cname="hovering-over-link" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="const-gchar*" name="title" />
-				<parameter type="const-gchar*" name="link" />
-			</parameters>
-		</signal>
-
-		<signal name="PopulatePopup" cname="populate-popup" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="GtkMenu" name="menu" />
-			</parameters>
-		</signal>
-
-		<signal name="StatusBarTextChanged" cname="status-bar-text-changed" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="const-gchar*" name="value" />
-			</parameters>
-		</signal>
-
-		<signal name="IconLoaded" cname="icon-loaded" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-			</parameters>
-		</signal>
-
-		<signal name="SelectionChanged" cname="selection-changed" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-			</parameters>
-		</signal>
-
 	</add-node>
-
 </metadata>
 
