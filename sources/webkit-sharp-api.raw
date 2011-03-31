@@ -56,6 +56,16 @@
       <method name="GetStatus" cname="webkit_download_get_status">
         <return-type type="WebKitDownloadStatus"/>
       </method>
+      <property name="CurrentSize" cname="current-size" type="guint64" readable="true" writable="false"/>
+      <property name="DestinationUri" cname="destination-uri" type="const-gchar*" readable="true" writable="true"/>
+      <property name="NetworkRequest" cname="network-request" type="WebKitNetworkRequest*" readable="true" writable="true"/>
+      <property name="NetworkResponse" cname="network-response" type="WebKitNetworkResponse*" readable="true" writable="true"/>
+      <property name="Progress" cname="progress" type="gdouble" readable="true" writable="false"/>
+      <property name="Status" cname="status" type="WebKitDownloadStatus" readable="true" writable="false"/>
+      <property name="SuggestedFilename" cname="suggested-filename" type="const-gchar*" readable="true" writable="false"/>
+      <property name="TotalSize" cname="total-size" type="guint64" readable="true" writable="false"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitDownloadPrivate*"/>
       <signal name="Error" cname="error">
         <return-type type="gboolean"/>
         <parameters>
@@ -71,6 +81,7 @@
       <member cname="WEBKIT_DOWNLOAD_ERROR_DESTINATION" name="Destination"/>
       <member cname="WEBKIT_DOWNLOAD_ERROR_NETWORK" name="Network"/>
     </enum>
+    <struct name="DownloadPrivate" cname="WebKitDownloadPrivate"/>
     <enum name="DownloadStatus" cname="WebKitDownloadStatus">
       <member cname="WEBKIT_DOWNLOAD_STATUS_ERROR" name="Error"/>
       <member cname="WEBKIT_DOWNLOAD_STATUS_CREATED" name="Created"/>
@@ -86,12 +97,22 @@
       <method name="GetType" cname="webkit_geolocation_policy_decision_get_type" shared="true">
         <return-type type="GType"/>
       </method>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitGeolocationPolicyDecisionPrivate*"/>
     </object>
+    <struct name="GeolocationPolicyDecisionPrivate" cname="WebKitGeolocationPolicyDecisionPrivate"/>
     <object name="HitTestResult" cname="WebKitHitTestResult" parent="GObject">
       <method name="GetType" cname="webkit_hit_test_result_get_type" shared="true">
         <return-type type="GType"/>
       </method>
+      <property name="Context" cname="context" type="WebKitHitTestResultContext" readable="true" writable="true"/>
+      <property name="ImageUri" cname="image-uri" type="const-gchar*" readable="true" writable="true"/>
+      <property name="LinkUri" cname="link-uri" type="const-gchar*" readable="true" writable="true"/>
+      <property name="MediaUri" cname="media-uri" type="const-gchar*" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitHitTestResultPrivate*"/>
     </object>
+    <struct name="HitTestResultPrivate" cname="WebKitHitTestResultPrivate"/>
     <enum name="LoadStatus" cname="WebKitLoadStatus">
       <member cname="WEBKIT_LOAD_PROVISIONAL" name="Provisional"/>
       <member cname="WEBKIT_LOAD_COMMITTED" name="Committed"/>
@@ -132,7 +153,12 @@
       <method name="GetMessage" cname="webkit_network_request_get_message">
         <return-type type="SoupMessage*"/>
       </method>
+      <property name="Message" cname="message" type="SoupMessage" readable="true" writable="true"/>
+      <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitNetworkRequestPrivate*"/>
     </object>
+    <struct name="NetworkRequestPrivate" cname="WebKitNetworkRequestPrivate"/>
     <object name="NetworkResponse" cname="WebKitNetworkResponse" parent="GObject">
       <method name="GetType" cname="webkit_network_response_get_type" shared="true">
         <return-type type="GType"/>
@@ -154,7 +180,12 @@
       <method name="GetMessage" cname="webkit_network_response_get_message">
         <return-type type="SoupMessage*"/>
       </method>
+      <property name="Message" cname="message" type="SoupMessage" readable="true" writable="true"/>
+      <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitNetworkResponsePrivate*"/>
     </object>
+    <struct name="NetworkResponsePrivate" cname="WebKitNetworkResponsePrivate"/>
     <enum name="PluginError" cname="WebKitPluginError">
       <member cname="WEBKIT_PLUGIN_ERROR_CANNOT_FIND_PLUGIN" name="CannotFindPlugin"/>
       <member cname="WEBKIT_PLUGIN_ERROR_CANNOT_LOAD_PLUGIN" name="CannotLoadPlugin"/>
@@ -198,11 +229,20 @@
       <method name="GetAllWebDatabases" cname="webkit_security_origin_get_all_web_databases">
         <return-type type="GList*"/>
       </method>
+      <property name="Host" cname="host" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Port" cname="port" type="guint" readable="true" writable="false"/>
+      <property name="Protocol" cname="protocol" type="const-gchar*" readable="true" writable="false"/>
+      <property name="WebDatabaseQuota" cname="web-database-quota" type="guint64" readable="true" writable="true"/>
+      <property name="WebDatabaseUsage" cname="web-database-usage" type="guint64" readable="true" writable="false"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitSecurityOriginPrivate*"/>
     </object>
+    <struct name="SecurityOriginPrivate" cname="WebKitSecurityOriginPrivate"/>
     <object name="SoupAuthDialog" cname="WebKitSoupAuthDialog" parent="GObject">
       <method name="GetType" cname="webkit_soup_auth_dialog_get_type" shared="true">
         <return-type type="GType"/>
       </method>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
       <signal name="CurrentToplevel" cname="current-toplevel">
         <return-type type="GtkWidget"/>
         <parameters>
@@ -289,7 +329,10 @@
       <method name="Clear" cname="webkit_web_back_forward_list_clear">
         <return-type type="void"/>
       </method>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebBackForwardListPrivate*"/>
     </object>
+    <struct name="WebBackForwardListPrivate" cname="WebKitWebBackForwardListPrivate"/>
     <object name="WebDataSource" cname="WebKitWebDataSource" parent="GObject">
       <method name="GetType" cname="webkit_web_data_source_get_type" shared="true">
         <return-type type="GType"/>
@@ -327,7 +370,10 @@
       <method name="GetSubresources" cname="webkit_web_data_source_get_subresources">
         <return-type type="GList*"/>
       </method>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebDataSourcePrivate*"/>
     </object>
+    <struct name="WebDataSourcePrivate" cname="WebKitWebDataSourcePrivate"/>
     <object name="WebDatabase" cname="WebKitWebDatabase" parent="GObject">
       <method name="GetType" cname="webkit_web_database_get_type" shared="true">
         <return-type type="GType"/>
@@ -353,7 +399,16 @@
       <method name="Remove" cname="webkit_web_database_remove">
         <return-type type="void"/>
       </method>
+      <property name="DisplayName" cname="display-name" type="const-gchar*" readable="true" writable="false"/>
+      <property name="ExpectedSize" cname="expected-size" type="guint64" readable="true" writable="false"/>
+      <property name="Filename" cname="filename" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Name" cname="name" type="const-gchar*" readable="true" writable="true"/>
+      <property name="SecurityOrigin" cname="security-origin" type="WebKitSecurityOrigin*" readable="true" writable="true"/>
+      <property name="Size" cname="size" type="guint64" readable="true" writable="false"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebDatabasePrivate*"/>
     </object>
+    <struct name="WebDatabasePrivate" cname="WebKitWebDatabasePrivate"/>
     <object name="WebFrame" cname="WebKitWebFrame" parent="GObject">
       <method name="GetType" cname="webkit_web_frame_get_type" shared="true">
         <return-type type="GType"/>
@@ -453,6 +508,14 @@
       <method name="GetNetworkResponse" cname="webkit_web_frame_get_network_response">
         <return-type type="WebKitNetworkResponse*"/>
       </method>
+      <property name="HorizontalScrollbarPolicy" cname="horizontal-scrollbar-policy" type="GtkPolicyType" readable="true" writable="false"/>
+      <property name="LoadStatus" cname="load-status" type="WebKitLoadStatus" readable="true" writable="false"/>
+      <property name="Name" cname="name" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Title" cname="title" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="false"/>
+      <property name="VerticalScrollbarPolicy" cname="vertical-scrollbar-policy" type="GtkPolicyType" readable="true" writable="false"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebFramePrivate*"/>
       <signal name="Cleared" cname="cleared">
         <return-type type="void"/>
         <parameters>
@@ -494,6 +557,7 @@
         </parameters>
       </signal>
     </object>
+    <struct name="WebFramePrivate" cname="WebKitWebFramePrivate"/>
     <object name="WebHistoryItem" cname="WebKitWebHistoryItem" parent="GObject">
       <method name="GetType" cname="webkit_web_history_item_get_type" shared="true">
         <return-type type="GType"/>
@@ -529,7 +593,15 @@
       <method name="Copy" cname="webkit_web_history_item_copy">
         <return-type type="WebKitWebHistoryItem*"/>
       </method>
+      <property name="AlternateTitle" cname="alternate-title" type="const-gchar*" readable="true" writable="true"/>
+      <property name="LastVisitedTime" cname="last-visited-time" type="gdouble" readable="true" writable="false"/>
+      <property name="OriginalUri" cname="original-uri" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Title" cname="title" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="false"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebHistoryItemPrivate*"/>
     </object>
+    <struct name="WebHistoryItemPrivate" cname="WebKitWebHistoryItemPrivate"/>
     <object name="WebInspector" cname="WebKitWebInspector" parent="GObject">
       <method name="GetType" cname="webkit_web_inspector_get_type" shared="true">
         <return-type type="GType"/>
@@ -553,6 +625,12 @@
       <method name="Close" cname="webkit_web_inspector_close">
         <return-type type="void"/>
       </method>
+      <property name="InspectedUri" cname="inspected-uri" type="const-gchar*" readable="true" writable="false"/>
+      <property name="JavascriptProfilingEnabled" cname="javascript-profiling-enabled" type="gboolean" readable="true" writable="true"/>
+      <property name="TimelineProfilingEnabled" cname="timeline-profiling-enabled" type="gboolean" readable="true" writable="true"/>
+      <property name="WebView" cname="web-view" type="WebKitWebView*" readable="true" writable="false"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebInspectorPrivate*"/>
       <signal name="AttachWindow" cname="attach-window">
         <return-type type="gboolean"/>
         <parameters>
@@ -591,6 +669,7 @@
         </parameters>
       </signal>
     </object>
+    <struct name="WebInspectorPrivate" cname="WebKitWebInspectorPrivate"/>
     <object name="WebNavigationAction" cname="WebKitWebNavigationAction" parent="GObject">
       <method name="GetType" cname="webkit_web_navigation_action_get_type" shared="true">
         <return-type type="GType"/>
@@ -622,7 +701,15 @@
       <method name="GetTargetFrame" cname="webkit_web_navigation_action_get_target_frame">
         <return-type type="const-gchar*"/>
       </method>
+      <property name="Button" cname="button" type="gint" readable="true" writable="true"/>
+      <property name="ModifierState" cname="modifier-state" type="gint" readable="true" writable="true"/>
+      <property name="OriginalUri" cname="original-uri" type="const-gchar*" readable="true" writable="true"/>
+      <property name="Reason" cname="reason" type="WebKitWebNavigationReason" readable="true" writable="true"/>
+      <property name="TargetFrame" cname="target-frame" type="const-gchar*" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebNavigationActionPrivate*"/>
     </object>
+    <struct name="WebNavigationActionPrivate" cname="WebKitWebNavigationActionPrivate"/>
     <enum name="WebNavigationReason" cname="WebKitWebNavigationReason">
       <member cname="WEBKIT_WEB_NAVIGATION_REASON_LINK_CLICKED" name="LinkClicked"/>
       <member cname="WEBKIT_WEB_NAVIGATION_REASON_FORM_SUBMITTED" name="FormSubmitted"/>
@@ -644,7 +731,10 @@
       <method name="Download" cname="webkit_web_policy_decision_download">
         <return-type type="void"/>
       </method>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebPolicyDecisionPrivate*"/>
     </object>
+    <struct name="WebPolicyDecisionPrivate" cname="WebKitWebPolicyDecisionPrivate"/>
     <object name="WebResource" cname="WebKitWebResource" parent="GObject">
       <method name="GetType" cname="webkit_web_resource_get_type" shared="true">
         <return-type type="GType"/>
@@ -674,7 +764,14 @@
       <method name="GetFrameName" cname="webkit_web_resource_get_frame_name">
         <return-type type="const-gchar*"/>
       </method>
+      <property name="Encoding" cname="encoding" type="const-gchar*" readable="true" writable="false"/>
+      <property name="FrameName" cname="frame-name" type="const-gchar*" readable="true" writable="false"/>
+      <property name="MimeType" cname="mime-type" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebResourcePrivate*"/>
     </object>
+    <struct name="WebResourcePrivate" cname="WebKitWebResourcePrivate"/>
     <object name="WebSettings" cname="WebKitWebSettings" parent="GObject">
       <method name="GetType" cname="webkit_web_settings_get_type" shared="true">
         <return-type type="GType"/>
@@ -686,7 +783,53 @@
       <method name="GetUserAgent" cname="webkit_web_settings_get_user_agent">
         <return-type type="const-gchar*"/>
       </method>
+      <property name="AutoLoadImages" cname="auto-load-images" type="gboolean" readable="true" writable="true"/>
+      <property name="AutoResizeWindow" cname="auto-resize-window" type="gboolean" readable="true" writable="true"/>
+      <property name="AutoShrinkImages" cname="auto-shrink-images" type="gboolean" readable="true" writable="true"/>
+      <property name="CursiveFontFamily" cname="cursive-font-family" type="const-gchar*" readable="true" writable="true"/>
+      <property name="DefaultEncoding" cname="default-encoding" type="const-gchar*" readable="true" writable="true"/>
+      <property name="DefaultFontFamily" cname="default-font-family" type="const-gchar*" readable="true" writable="true"/>
+      <property name="DefaultFontSize" cname="default-font-size" type="gint" readable="true" writable="true"/>
+      <property name="DefaultMonospaceFontSize" cname="default-monospace-font-size" type="gint" readable="true" writable="true"/>
+      <property name="EditingBehavior" cname="editing-behavior" type="WebKitEditingBehavior" readable="true" writable="true"/>
+      <property name="EnableCaretBrowsing" cname="enable-caret-browsing" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableDefaultContextMenu" cname="enable-default-context-menu" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableDeveloperExtras" cname="enable-developer-extras" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableDomPaste" cname="enable-dom-paste" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableFileAccessFromFileUris" cname="enable-file-access-from-file-uris" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableHtml5Database" cname="enable-html5-database" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableHtml5LocalStorage" cname="enable-html5-local-storage" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableJavaApplet" cname="enable-java-applet" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableOfflineWebApplicationCache" cname="enable-offline-web-application-cache" type="gboolean" readable="true" writable="true"/>
+      <property name="EnablePageCache" cname="enable-page-cache" type="gboolean" readable="true" writable="true"/>
+      <property name="EnablePlugins" cname="enable-plugins" type="gboolean" readable="true" writable="true"/>
+      <property name="EnablePrivateBrowsing" cname="enable-private-browsing" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableScripts" cname="enable-scripts" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableSiteSpecificQuirks" cname="enable-site-specific-quirks" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableSpatialNavigation" cname="enable-spatial-navigation" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableSpellChecking" cname="enable-spell-checking" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableUniversalAccessFromFileUris" cname="enable-universal-access-from-file-uris" type="gboolean" readable="true" writable="true"/>
+      <property name="EnableXssAuditor" cname="enable-xss-auditor" type="gboolean" readable="true" writable="true"/>
+      <property name="Enforce96Dpi" cname="enforce-96-dpi" type="gboolean" readable="true" writable="true"/>
+      <property name="FantasyFontFamily" cname="fantasy-font-family" type="const-gchar*" readable="true" writable="true"/>
+      <property name="JavascriptCanAccessClipboard" cname="javascript-can-access-clipboard" type="gboolean" readable="true" writable="true"/>
+      <property name="JavascriptCanOpenWindowsAutomatically" cname="javascript-can-open-windows-automatically" type="gboolean" readable="true" writable="true"/>
+      <property name="MinimumFontSize" cname="minimum-font-size" type="gint" readable="true" writable="true"/>
+      <property name="MinimumLogicalFontSize" cname="minimum-logical-font-size" type="gint" readable="true" writable="true"/>
+      <property name="MonospaceFontFamily" cname="monospace-font-family" type="const-gchar*" readable="true" writable="true"/>
+      <property name="PrintBackgrounds" cname="print-backgrounds" type="gboolean" readable="true" writable="true"/>
+      <property name="ResizableTextAreas" cname="resizable-text-areas" type="gboolean" readable="true" writable="true"/>
+      <property name="SansSerifFontFamily" cname="sans-serif-font-family" type="const-gchar*" readable="true" writable="true"/>
+      <property name="SerifFontFamily" cname="serif-font-family" type="const-gchar*" readable="true" writable="true"/>
+      <property name="SpellCheckingLanguages" cname="spell-checking-languages" type="const-gchar*" readable="true" writable="true"/>
+      <property name="TabKeyCyclesThroughElements" cname="tab-key-cycles-through-elements" type="gboolean" readable="true" writable="true"/>
+      <property name="UserAgent" cname="user-agent" type="const-gchar*" readable="true" writable="true"/>
+      <property name="UserStylesheetUri" cname="user-stylesheet-uri" type="const-gchar*" readable="true" writable="true"/>
+      <property name="ZoomStep" cname="zoom-step" type="gfloat" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebSettingsPrivate*"/>
     </object>
+    <struct name="WebSettingsPrivate" cname="WebKitWebSettingsPrivate"/>
     <object name="WebView" cname="WebKitWebView" parent="GtkContainer">
       <method name="GetType" cname="webkit_web_view_get_type" shared="true">
         <return-type type="GType"/>
@@ -976,6 +1119,25 @@
       <method name="GetIconUri" cname="webkit_web_view_get_icon_uri">
         <return-type type="const-gchar*"/>
       </method>
+      <property name="CopyTargetList" cname="copy-target-list" type="GtkTargetList" readable="true" writable="false"/>
+      <property name="CustomEncoding" cname="custom-encoding" type="const-gchar*" readable="true" writable="true"/>
+      <property name="Editable" cname="editable" type="gboolean" readable="true" writable="true"/>
+      <property name="Encoding" cname="encoding" type="const-gchar*" readable="true" writable="false"/>
+      <property name="FullContentZoom" cname="full-content-zoom" type="gboolean" readable="true" writable="true"/>
+      <property name="IconUri" cname="icon-uri" type="const-gchar*" readable="true" writable="false"/>
+      <property name="ImContext" cname="im-context" type="GtkIMContext" readable="true" writable="false"/>
+      <property name="LoadStatus" cname="load-status" type="WebKitLoadStatus" readable="true" writable="false"/>
+      <property name="PasteTargetList" cname="paste-target-list" type="GtkTargetList" readable="true" writable="false"/>
+      <property name="Progress" cname="progress" type="gdouble" readable="true" writable="false"/>
+      <property name="Settings" cname="settings" type="WebKitWebSettings*" readable="true" writable="true"/>
+      <property name="Title" cname="title" type="const-gchar*" readable="true" writable="false"/>
+      <property name="Transparent" cname="transparent" type="gboolean" readable="true" writable="true"/>
+      <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="false"/>
+      <property name="WebInspector" cname="web-inspector" type="WebKitWebInspector*" readable="true" writable="false"/>
+      <property name="WindowFeatures" cname="window-features" type="WebKitWebWindowFeatures*" readable="true" writable="true"/>
+      <property name="ZoomLevel" cname="zoom-level" type="gfloat" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GtkContainer"/>
+      <field name="Priv" cname="priv" type="WebKitWebViewPrivate*"/>
       <signal name="CloseWebView" cname="close-web-view">
         <return-type type="gboolean"/>
         <parameters>
@@ -1230,6 +1392,7 @@
         </parameters>
       </signal>
     </object>
+    <struct name="WebViewPrivate" cname="WebKitWebViewPrivate"/>
     <enum name="WebViewTargetInfo" cname="WebKitWebViewTargetInfo">
       <member cname="WEBKIT_WEB_VIEW_TARGET_INFO_HTML" name="Html"/>
       <member cname="WEBKIT_WEB_VIEW_TARGET_INFO_TEXT" name="Text"/>
@@ -1248,6 +1411,19 @@
           <parameter name="features2" type="WebKitWebWindowFeatures*"/>
         </parameters>
       </method>
+      <property name="Fullscreen" cname="fullscreen" type="gboolean" readable="true" writable="true"/>
+      <property name="Height" cname="height" type="gint" readable="true" writable="true"/>
+      <property name="LocationbarVisible" cname="locationbar-visible" type="gboolean" readable="true" writable="true"/>
+      <property name="MenubarVisible" cname="menubar-visible" type="gboolean" readable="true" writable="true"/>
+      <property name="ScrollbarVisible" cname="scrollbar-visible" type="gboolean" readable="true" writable="true"/>
+      <property name="StatusbarVisible" cname="statusbar-visible" type="gboolean" readable="true" writable="true"/>
+      <property name="ToolbarVisible" cname="toolbar-visible" type="gboolean" readable="true" writable="true"/>
+      <property name="Width" cname="width" type="gint" readable="true" writable="true"/>
+      <property name="X" cname="x" type="gint" readable="true" writable="true"/>
+      <property name="Y" cname="y" type="gint" readable="true" writable="true"/>
+      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field name="Priv" cname="priv" type="WebKitWebWindowFeaturesPrivate*"/>
     </object>
+    <struct name="WebWindowFeaturesPrivate" cname="WebKitWebWindowFeaturesPrivate"/>
   </namespace>
 </api>

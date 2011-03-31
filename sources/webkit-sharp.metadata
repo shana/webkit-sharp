@@ -10,5 +10,13 @@
 			</parameters>
 		</signal>
 	</add-node>
+
+    <attr path="/api/namespace/object[@name='WebView']/method[@name='CanGoBack']" name="name">GetCanGoBack</attr>
+    <attr path="/api/namespace/object[@name='WebView']/method[@name='CanGoForward']" name="name">GetCanGoForward</attr>
+    <attr path="/api/namespace/object[@name='WebView']/method[@name='CanCopyClipboard']" name="name">GetCanCopyClipboard</attr>
+    <attr path="/api/namespace/object[@name='WebView']/method[@name='CanCutClipboard']" name="name">GetCanCutClipboard</attr>
+    <attr path="/api/namespace/object[@name='WebView']/method[@name='CanPasteClipboard']" name="name">GetCanPasteClipboard</attr>
+    <attr path="/api/namespace/object[@name='WebView']/method[@name='CanRedo']" name="name">GetCanRedo</attr>
+    <attr path="/api/namespace/object[@name='WebView']/method[@name='CanUndo']" name="name">GetCanUndo</attr>
 </metadata>
 

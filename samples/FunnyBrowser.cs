@@ -203,8 +203,8 @@ namespace FunnyBrowser
 
 		private void OnLoadCommitted (object o, LoadCommittedArgs args)
 		{
-			action_back.Sensitive = webview.CanGoBack ();
-			action_forward.Sensitive = webview.CanGoForward ();
+			action_back.Sensitive = webview.CanGoBack;
+			action_forward.Sensitive = webview.CanGoForward;
 
 			uri_entry.Text = args.Frame.Uri;
 		}
