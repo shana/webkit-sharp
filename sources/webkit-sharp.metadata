@@ -6,11 +6,12 @@
 			<return-type type="void" />
 			<parameters>
 				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitLoadStatus*" name="status" />
+				<parameter type="WebKitLoadStatus" name="status" />
 			</parameters>
 		</signal>
 	</add-node>
 
+    <attr path="/api/namespace/object[@name='WebView']/signal[@name='DownloadRequested']/parameters/parameter[@name='download']" name="type">WebKitDownload</attr>
     <attr path="/api/namespace/object[@name='WebView']/method[@name='CanGoBack']" name="name">GetCanGoBack</attr>
     <attr path="/api/namespace/object[@name='WebView']/method[@name='CanGoForward']" name="name">GetCanGoForward</attr>
     <attr path="/api/namespace/object[@name='WebView']/method[@name='CanCopyClipboard']" name="name">GetCanCopyClipboard</attr>
