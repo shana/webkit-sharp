@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api>
   <namespace name="WebKit" library="webkit-1.0">
-    <enum name="CacheModel" cname="WebKitCacheModel">
+    <enum name="CacheModel" cname="WebKitCacheModel" type="enum">
       <member cname="WEBKIT_CACHE_MODEL_DOCUMENT_VIEWER" name="DocumentViewer"/>
       <member cname="WEBKIT_CACHE_MODEL_WEB_BROWSER" name="WebBrowser"/>
     </enum>
@@ -11,7 +11,7 @@
       </method>
       <constructor cname="webkit_download_new">
         <parameters>
-          <parameter type="WebKitNetworkRequest*" name="request"/>
+          <parameter name="request" type="WebKitNetworkRequest*"/>
         </parameters>
       </constructor>
       <method name="Start" cname="webkit_download_start">
@@ -64,8 +64,8 @@
       <property name="Status" cname="status" type="WebKitDownloadStatus" readable="true" writable="false"/>
       <property name="SuggestedFilename" cname="suggested-filename" type="const-gchar*" readable="true" writable="false"/>
       <property name="TotalSize" cname="total-size" type="guint64" readable="true" writable="false"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitDownloadPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitDownloadPrivate*"/>
       <signal name="Error" cname="error">
         <return-type type="gboolean"/>
         <parameters>
@@ -76,20 +76,20 @@
         </parameters>
       </signal>
     </object>
-    <enum name="DownloadError" cname="WebKitDownloadError">
+    <enum name="DownloadError" cname="WebKitDownloadError" type="enum">
       <member cname="WEBKIT_DOWNLOAD_ERROR_CANCELLED_BY_USER" name="CancelledByUser"/>
       <member cname="WEBKIT_DOWNLOAD_ERROR_DESTINATION" name="Destination"/>
       <member cname="WEBKIT_DOWNLOAD_ERROR_NETWORK" name="Network"/>
     </enum>
     <struct name="DownloadPrivate" cname="WebKitDownloadPrivate"/>
-    <enum name="DownloadStatus" cname="WebKitDownloadStatus">
+    <enum name="DownloadStatus" cname="WebKitDownloadStatus" type="enum">
       <member cname="WEBKIT_DOWNLOAD_STATUS_ERROR" name="Error"/>
       <member cname="WEBKIT_DOWNLOAD_STATUS_CREATED" name="Created"/>
       <member cname="WEBKIT_DOWNLOAD_STATUS_STARTED" name="Started"/>
       <member cname="WEBKIT_DOWNLOAD_STATUS_CANCELLED" name="Cancelled"/>
       <member cname="WEBKIT_DOWNLOAD_STATUS_FINISHED" name="Finished"/>
     </enum>
-    <enum name="EditingBehavior" cname="WebKitEditingBehavior">
+    <enum name="EditingBehavior" cname="WebKitEditingBehavior" type="enum">
       <member cname="WEBKIT_EDITING_BEHAVIOR_MAC" name="Mac"/>
       <member cname="WEBKIT_EDITING_BEHAVIOR_WINDOWS" name="Windows"/>
     </enum>
@@ -97,8 +97,8 @@
       <method name="GetType" cname="webkit_geolocation_policy_decision_get_type" shared="true">
         <return-type type="GType"/>
       </method>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitGeolocationPolicyDecisionPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitGeolocationPolicyDecisionPrivate*"/>
     </object>
     <struct name="GeolocationPolicyDecisionPrivate" cname="WebKitGeolocationPolicyDecisionPrivate"/>
     <object name="HitTestResult" cname="WebKitHitTestResult" parent="GObject">
@@ -109,23 +109,23 @@
       <property name="ImageUri" cname="image-uri" type="const-gchar*" readable="true" writable="true"/>
       <property name="LinkUri" cname="link-uri" type="const-gchar*" readable="true" writable="true"/>
       <property name="MediaUri" cname="media-uri" type="const-gchar*" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitHitTestResultPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitHitTestResultPrivate*"/>
     </object>
     <struct name="HitTestResultPrivate" cname="WebKitHitTestResultPrivate"/>
-    <enum name="LoadStatus" cname="WebKitLoadStatus">
+    <enum name="LoadStatus" cname="WebKitLoadStatus" type="enum">
       <member cname="WEBKIT_LOAD_PROVISIONAL" name="Provisional"/>
       <member cname="WEBKIT_LOAD_COMMITTED" name="Committed"/>
       <member cname="WEBKIT_LOAD_FINISHED" name="Finished"/>
       <member cname="WEBKIT_LOAD_FIRST_VISUALLY_NON_EMPTY_LAYOUT" name="FirstVisuallyNonEmptyLayout"/>
       <member cname="WEBKIT_LOAD_FAILED" name="Failed"/>
     </enum>
-    <enum name="NavigationResponse" cname="WebKitNavigationResponse">
+    <enum name="NavigationResponse" cname="WebKitNavigationResponse" type="enum">
       <member cname="WEBKIT_NAVIGATION_RESPONSE_ACCEPT" name="Accept"/>
       <member cname="WEBKIT_NAVIGATION_RESPONSE_IGNORE" name="Ignore"/>
       <member cname="WEBKIT_NAVIGATION_RESPONSE_DOWNLOAD" name="Download"/>
     </enum>
-    <enum name="NetworkError" cname="WebKitNetworkError">
+    <enum name="NetworkError" cname="WebKitNetworkError" type="enum">
       <member cname="WEBKIT_NETWORK_ERROR_TRANSPORT" name="Transport"/>
       <member cname="WEBKIT_NETWORK_ERROR_UNKNOWN_PROTOCOL" name="UnknownProtocol"/>
       <member cname="WEBKIT_NETWORK_ERROR_CANCELLED" name="Cancelled"/>
@@ -138,7 +138,7 @@
       </method>
       <constructor cname="webkit_network_request_new">
         <parameters>
-          <parameter type="gchar*" name="uri"/>
+          <parameter name="uri" type="const-gchar*"/>
         </parameters>
       </constructor>
       <method name="SetUri" cname="webkit_network_request_set_uri">
@@ -155,8 +155,8 @@
       </method>
       <property name="Message" cname="message" type="SoupMessage" readable="true" writable="true"/>
       <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitNetworkRequestPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitNetworkRequestPrivate*"/>
     </object>
     <struct name="NetworkRequestPrivate" cname="WebKitNetworkRequestPrivate"/>
     <object name="NetworkResponse" cname="WebKitNetworkResponse" parent="GObject">
@@ -165,7 +165,7 @@
       </method>
       <constructor cname="webkit_network_response_new">
         <parameters>
-          <parameter type="gchar*" name="uri"/>
+          <parameter name="uri" type="const-gchar*"/>
         </parameters>
       </constructor>
       <method name="SetUri" cname="webkit_network_response_set_uri">
@@ -182,11 +182,11 @@
       </method>
       <property name="Message" cname="message" type="SoupMessage" readable="true" writable="true"/>
       <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitNetworkResponsePrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitNetworkResponsePrivate*"/>
     </object>
     <struct name="NetworkResponsePrivate" cname="WebKitNetworkResponsePrivate"/>
-    <enum name="PluginError" cname="WebKitPluginError">
+    <enum name="PluginError" cname="WebKitPluginError" type="enum">
       <member cname="WEBKIT_PLUGIN_ERROR_CANNOT_FIND_PLUGIN" name="CannotFindPlugin"/>
       <member cname="WEBKIT_PLUGIN_ERROR_CANNOT_LOAD_PLUGIN" name="CannotLoadPlugin"/>
       <member cname="WEBKIT_PLUGIN_ERROR_JAVA_UNAVAILABLE" name="JavaUnavailable"/>
@@ -194,7 +194,7 @@
       <member cname="WEBKIT_PLUGIN_ERROR_WILL_HANDLE_LOAD" name="WillHandleLoad"/>
       <member cname="WEBKIT_PLUGIN_ERROR_FAILED" name="Failed"/>
     </enum>
-    <enum name="PolicyError" cname="WebKitPolicyError">
+    <enum name="PolicyError" cname="WebKitPolicyError" type="enum">
       <member cname="WEBKIT_POLICY_ERROR_CANNOT_SHOW_MIME_TYPE" name="CannotShowMimeType"/>
       <member cname="WEBKIT_POLICY_ERROR_CANNOT_SHOW_URL" name="CannotShowUrl"/>
       <member cname="WEBKIT_POLICY_ERROR_FRAME_LOAD_INTERRUPTED_BY_POLICY_CHANGE" name="FrameLoadInterruptedByPolicyChange"/>
@@ -234,15 +234,15 @@
       <property name="Protocol" cname="protocol" type="const-gchar*" readable="true" writable="false"/>
       <property name="WebDatabaseQuota" cname="web-database-quota" type="guint64" readable="true" writable="true"/>
       <property name="WebDatabaseUsage" cname="web-database-usage" type="guint64" readable="true" writable="false"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitSecurityOriginPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitSecurityOriginPrivate*"/>
     </object>
     <struct name="SecurityOriginPrivate" cname="WebKitSecurityOriginPrivate"/>
     <object name="SoupAuthDialog" cname="WebKitSoupAuthDialog" parent="GObject">
       <method name="GetType" cname="webkit_soup_auth_dialog_get_type" shared="true">
         <return-type type="GType"/>
       </method>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
       <signal name="CurrentToplevel" cname="current-toplevel">
         <return-type type="GtkWidget"/>
         <parameters>
@@ -257,7 +257,7 @@
       </method>
       <constructor cname="webkit_web_back_forward_list_new_with_web_view">
         <parameters>
-          <parameter type="WebKitWebView*" name="web_view"/>
+          <parameter name="web_view" type="WebKitWebView*"/>
         </parameters>
       </constructor>
       <method name="GoForward" cname="webkit_web_back_forward_list_go_forward">
@@ -329,8 +329,8 @@
       <method name="Clear" cname="webkit_web_back_forward_list_clear">
         <return-type type="void"/>
       </method>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebBackForwardListPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebBackForwardListPrivate*"/>
     </object>
     <struct name="WebBackForwardListPrivate" cname="WebKitWebBackForwardListPrivate"/>
     <object name="WebDataSource" cname="WebKitWebDataSource" parent="GObject">
@@ -340,7 +340,7 @@
       <constructor cname="webkit_web_data_source_new"/>
       <constructor cname="webkit_web_data_source_new_with_request">
         <parameters>
-          <parameter type="WebKitNetworkRequest*" name="request"/>
+          <parameter name="request" type="WebKitNetworkRequest*"/>
         </parameters>
       </constructor>
       <method name="GetWebFrame" cname="webkit_web_data_source_get_web_frame">
@@ -370,8 +370,8 @@
       <method name="GetSubresources" cname="webkit_web_data_source_get_subresources">
         <return-type type="GList*"/>
       </method>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebDataSourcePrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebDataSourcePrivate*"/>
     </object>
     <struct name="WebDataSourcePrivate" cname="WebKitWebDataSourcePrivate"/>
     <object name="WebDatabase" cname="WebKitWebDatabase" parent="GObject">
@@ -405,8 +405,8 @@
       <property name="Name" cname="name" type="const-gchar*" readable="true" writable="true"/>
       <property name="SecurityOrigin" cname="security-origin" type="WebKitSecurityOrigin*" readable="true" writable="true"/>
       <property name="Size" cname="size" type="guint64" readable="true" writable="false"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebDatabasePrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebDatabasePrivate*"/>
     </object>
     <struct name="WebDatabasePrivate" cname="WebKitWebDatabasePrivate"/>
     <object name="WebFrame" cname="WebKitWebFrame" parent="GObject">
@@ -415,7 +415,7 @@
       </method>
       <constructor cname="webkit_web_frame_new">
         <parameters>
-          <parameter type="WebKitWebView*" name="web_view"/>
+          <parameter name="web_view" type="WebKitWebView*"/>
         </parameters>
       </constructor>
       <method name="GetWebView" cname="webkit_web_frame_get_web_view">
@@ -514,8 +514,8 @@
       <property name="Title" cname="title" type="const-gchar*" readable="true" writable="false"/>
       <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="false"/>
       <property name="VerticalScrollbarPolicy" cname="vertical-scrollbar-policy" type="GtkPolicyType" readable="true" writable="false"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebFramePrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebFramePrivate*"/>
       <signal name="Cleared" cname="cleared">
         <return-type type="void"/>
         <parameters>
@@ -565,8 +565,8 @@
       <constructor cname="webkit_web_history_item_new"/>
       <constructor cname="webkit_web_history_item_new_with_data">
         <parameters>
-          <parameter type="gchar*" name="uri"/>
-          <parameter type="gchar*" name="title"/>
+          <parameter name="uri" type="const-gchar*"/>
+          <parameter name="title" type="const-gchar*"/>
         </parameters>
       </constructor>
       <method name="GetTitle" cname="webkit_web_history_item_get_title">
@@ -598,8 +598,8 @@
       <property name="OriginalUri" cname="original-uri" type="const-gchar*" readable="true" writable="false"/>
       <property name="Title" cname="title" type="const-gchar*" readable="true" writable="false"/>
       <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="false"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebHistoryItemPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebHistoryItemPrivate*"/>
     </object>
     <struct name="WebHistoryItemPrivate" cname="WebKitWebHistoryItemPrivate"/>
     <object name="WebInspector" cname="WebKitWebInspector" parent="GObject">
@@ -629,8 +629,8 @@
       <property name="JavascriptProfilingEnabled" cname="javascript-profiling-enabled" type="gboolean" readable="true" writable="true"/>
       <property name="TimelineProfilingEnabled" cname="timeline-profiling-enabled" type="gboolean" readable="true" writable="true"/>
       <property name="WebView" cname="web-view" type="WebKitWebView*" readable="true" writable="false"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebInspectorPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebInspectorPrivate*"/>
       <signal name="AttachWindow" cname="attach-window">
         <return-type type="gboolean"/>
         <parameters>
@@ -706,11 +706,11 @@
       <property name="OriginalUri" cname="original-uri" type="const-gchar*" readable="true" writable="true"/>
       <property name="Reason" cname="reason" type="WebKitWebNavigationReason" readable="true" writable="true"/>
       <property name="TargetFrame" cname="target-frame" type="const-gchar*" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebNavigationActionPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebNavigationActionPrivate*"/>
     </object>
     <struct name="WebNavigationActionPrivate" cname="WebKitWebNavigationActionPrivate"/>
-    <enum name="WebNavigationReason" cname="WebKitWebNavigationReason">
+    <enum name="WebNavigationReason" cname="WebKitWebNavigationReason" type="enum">
       <member cname="WEBKIT_WEB_NAVIGATION_REASON_LINK_CLICKED" name="LinkClicked"/>
       <member cname="WEBKIT_WEB_NAVIGATION_REASON_FORM_SUBMITTED" name="FormSubmitted"/>
       <member cname="WEBKIT_WEB_NAVIGATION_REASON_BACK_FORWARD" name="BackForward"/>
@@ -731,8 +731,8 @@
       <method name="Download" cname="webkit_web_policy_decision_download">
         <return-type type="void"/>
       </method>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebPolicyDecisionPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebPolicyDecisionPrivate*"/>
     </object>
     <struct name="WebPolicyDecisionPrivate" cname="WebKitWebPolicyDecisionPrivate"/>
     <object name="WebResource" cname="WebKitWebResource" parent="GObject">
@@ -741,12 +741,12 @@
       </method>
       <constructor cname="webkit_web_resource_new">
         <parameters>
-          <parameter type="gchar*" name="data"/>
-          <parameter type="gssize" name="size"/>
-          <parameter type="gchar*" name="uri"/>
-          <parameter type="gchar*" name="mime_type"/>
-          <parameter type="gchar*" name="encoding"/>
-          <parameter type="gchar*" name="frame_name"/>
+          <parameter name="data" type="const-gchar*"/>
+          <parameter name="size" type="gssize"/>
+          <parameter name="uri" type="const-gchar*"/>
+          <parameter name="mime_type" type="const-gchar*"/>
+          <parameter name="encoding" type="const-gchar*"/>
+          <parameter name="frame_name" type="const-gchar*"/>
         </parameters>
       </constructor>
       <method name="GetData" cname="webkit_web_resource_get_data">
@@ -768,8 +768,8 @@
       <property name="FrameName" cname="frame-name" type="const-gchar*" readable="true" writable="false"/>
       <property name="MimeType" cname="mime-type" type="const-gchar*" readable="true" writable="false"/>
       <property name="Uri" cname="uri" type="const-gchar*" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebResourcePrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebResourcePrivate*"/>
     </object>
     <struct name="WebResourcePrivate" cname="WebKitWebResourcePrivate"/>
     <object name="WebSettings" cname="WebKitWebSettings" parent="GObject">
@@ -826,8 +826,8 @@
       <property name="UserAgent" cname="user-agent" type="const-gchar*" readable="true" writable="true"/>
       <property name="UserStylesheetUri" cname="user-stylesheet-uri" type="const-gchar*" readable="true" writable="true"/>
       <property name="ZoomStep" cname="zoom-step" type="gfloat" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebSettingsPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebSettingsPrivate*"/>
     </object>
     <struct name="WebSettingsPrivate" cname="WebKitWebSettingsPrivate"/>
     <object name="WebView" cname="WebKitWebView" parent="GtkContainer">
@@ -1136,8 +1136,8 @@
       <property name="WebInspector" cname="web-inspector" type="WebKitWebInspector*" readable="true" writable="false"/>
       <property name="WindowFeatures" cname="window-features" type="WebKitWebWindowFeatures*" readable="true" writable="true"/>
       <property name="ZoomLevel" cname="zoom-level" type="gfloat" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GtkContainer"/>
-      <field name="Priv" cname="priv" type="WebKitWebViewPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GtkContainer"/>
+      <field cname="priv" name="Priv" type="WebKitWebViewPrivate*"/>
       <signal name="CloseWebView" cname="close-web-view">
         <return-type type="gboolean"/>
         <parameters>
@@ -1393,7 +1393,7 @@
       </signal>
     </object>
     <struct name="WebViewPrivate" cname="WebKitWebViewPrivate"/>
-    <enum name="WebViewTargetInfo" cname="WebKitWebViewTargetInfo">
+    <enum name="WebViewTargetInfo" cname="WebKitWebViewTargetInfo" type="enum">
       <member cname="WEBKIT_WEB_VIEW_TARGET_INFO_HTML" name="Html"/>
       <member cname="WEBKIT_WEB_VIEW_TARGET_INFO_TEXT" name="Text"/>
       <member cname="WEBKIT_WEB_VIEW_TARGET_INFO_IMAGE" name="Image"/>
@@ -1421,9 +1421,56 @@
       <property name="Width" cname="width" type="gint" readable="true" writable="true"/>
       <property name="X" cname="x" type="gint" readable="true" writable="true"/>
       <property name="Y" cname="y" type="gint" readable="true" writable="true"/>
-      <field name="ParentInstance" cname="parent_instance" type="GObject"/>
-      <field name="Priv" cname="priv" type="WebKitWebWindowFeaturesPrivate*"/>
+      <field cname="parent_instance" name="ParentInstance" type="GObject"/>
+      <field cname="priv" name="Priv" type="WebKitWebWindowFeaturesPrivate*"/>
     </object>
     <struct name="WebWindowFeaturesPrivate" cname="WebKitWebWindowFeaturesPrivate"/>
+    <object name="Global" cname="WebKitGlobal" opaque="true">
+      <method name="GeolocationPolicyAllow" cname="webkit_geolocation_policy_allow" shared="true">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="decision" type="WebKitGeolocationPolicyDecision*"/>
+        </parameters>
+      </method>
+      <method name="GeolocationPolicyDeny" cname="webkit_geolocation_policy_deny" shared="true">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="decision" type="WebKitGeolocationPolicyDecision*"/>
+        </parameters>
+      </method>
+      <method name="GetCacheModel" cname="webkit_get_cache_model" shared="true">
+        <return-type type="WebKitCacheModel"/>
+      </method>
+      <method name="GetDefaultSession" cname="webkit_get_default_session" shared="true">
+        <return-type type="SoupSession*"/>
+      </method>
+      <method name="GetDefaultWebDatabaseQuota" cname="webkit_get_default_web_database_quota" shared="true">
+        <return-type type="guint64"/>
+      </method>
+      <method name="GetWebDatabaseDirectoryPath" cname="webkit_get_web_database_directory_path" shared="true">
+        <return-type type="const-gchar*"/>
+      </method>
+      <method name="RemoveAllWebDatabases" cname="webkit_remove_all_web_databases" shared="true">
+        <return-type type="void"/>
+      </method>
+      <method name="SetCacheModel" cname="webkit_set_cache_model" shared="true">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="cache_model" type="WebKitCacheModel"/>
+        </parameters>
+      </method>
+      <method name="SetDefaultWebDatabaseQuota" cname="webkit_set_default_web_database_quota" shared="true">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="defaultQuota" type="guint64"/>
+        </parameters>
+      </method>
+      <method name="SetWebDatabaseDirectoryPath" cname="webkit_set_web_database_directory_path" shared="true">
+        <return-type type="void"/>
+        <parameters>
+          <parameter name="path" type="const-gchar*"/>
+        </parameters>
+      </method>
+    </object>
   </namespace>
 </api>
