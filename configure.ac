@@ -98,6 +98,13 @@ AC_SUBST(WEBKIT_LIBS)
 webkit_prefix=`pkg-config --variable=prefix webkit-1.0`
 AC_SUBST(webkit_prefix)
 
+dnl Check for soup-sharp
+PKG_CHECK_MODULES(SOUP_SHARP, soup-sharp)
+AC_SUBST(SOUP_SHARP_CFLAGS)
+AC_SUBST(SOUP_SHARP_LIBS)
+soupsharp_prefix=`pkg-config --variable=prefix soup-sharp`
+AC_SUBST(soupsharp_prefix)
+
 dnl Check for gapi
 AC_PATH_PROG(GAPI_PARSER, gapi2-parser, no)
 if test "x$GAPI_PARSER" = "xno"; then
