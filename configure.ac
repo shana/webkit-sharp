@@ -27,7 +27,7 @@ AC_SUBST(ASSEMBLY_COPYRIGHT)
 AC_SUBST(ASSEMBLY_PC)
 
 dnl Check for pkg-config
-AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+AC_PATH_PROG(PKG_CONFIG, [pkg-config], [no])
 if test "x$PKG_CONFIG" = "xno"; then
 	AC_MSG_ERROR(['pkg-config' is not in your PATH.])
 fi
@@ -38,24 +38,24 @@ PKG_CHECK_MODULES(MONO_DEPENDENCY, mint >= 1.0, has_mint=true, has_mint=false)
 
 if test "x$has_mono" = "xtrue"; then
 	if test `uname -s` = "Darwin"; then
-		AC_PATH_PROG(RUNTIME, mono, no)
-		AC_PATH_PROG(CSC, mcs, no)
+		AC_PATH_PROG(RUNTIME, [mono], [no])
+		AC_PATH_PROG(CSC, [mcs], [no])
 		LIB_PREFIX=
 		LIB_SUFFIX=.dylib
 	else
-		AC_PATH_PROG(RUNTIME, mono, no)
-		AC_PATH_PROG(CSC, mcs, no)
+		AC_PATH_PROG(RUNTIME, [mono], [no])
+		AC_PATH_PROG(CSC, [mcs], [no])
 		LIB_PREFIX=.so
 		LIB_SUFFIX=
 	fi
 else
 	if test "x$has_mint" = "xtrue"; then
-		AC_PATH_PROG(RUNTIME, mint, no)
-		AC_PATH_PROG(CSC, mcs, no)
+		AC_PATH_PROG(RUNTIME, [mint], [no])
+		AC_PATH_PROG(CSC, [mcs], [no])
 		LIB_PREFIX=.so
 		LIB_SUFFIX=
 	else
-		AC_PATH_PROG(CSC, csc.exe, no)
+		AC_PATH_PROG(CSC, [csc.exe], [no])
 		if test x$CSC = "xno"; then
 			AC_MSG_ERROR([You need to install either mono or .Net])
 		else
@@ -71,7 +71,7 @@ if test "x$CSC" = "xno" ; then
     AC_MSG_ERROR([No $CS compiler found])
 fi
 
-AC_PATH_PROG(GACUTIL, gacutil, no)
+AC_PATH_PROG(GACUTIL, [gacutil], [no])
 if test "x$GACUTIL" = "xno" ; then
 	AC_MSG_ERROR([No gacutil tool found])
 fi
@@ -99,7 +99,7 @@ webkit_prefix=`pkg-config --variable=prefix webkit-1.0`
 AC_SUBST(webkit_prefix)
 
 dnl Check for gapi
-AC_PATH_PROG(GAPI_PARSER, gapi2-parser, no)
+AC_PATH_PROG(GAPI_PARSER, [gapi2-parser], [no])
 if test "x$GAPI_PARSER" = "xno"; then
 	AC_MSG_CHECKING(for gapi2-parser.exe)
 	GAPI_PARSER=`which gapi2-parser.exe 2> /dev/null`
@@ -111,7 +111,7 @@ if test "x$GAPI_PARSER" = "xno"; then
 fi
 AC_SUBST(GAPI_PARSER)
 
-AC_PATH_PROG(GAPI_FIXUP, gapi2-fixup, no)
+AC_PATH_PROG(GAPI_FIXUP, [gapi2-fixup], [no])
 if test "x$GAPI_FIXUP" = "xno"; then
 	AC_MSG_CHECKING(for gapi2-fixup.exe)
 	GAPI_FIXUP=`which gapi2-fixup.exe 2> /dev/null`
@@ -123,7 +123,7 @@ if test "x$GAPI_FIXUP" = "xno"; then
 fi
 AC_SUBST(GAPI_FIXUP)
 
-AC_PATH_PROG(GAPI_CODEGEN, gapi2-codegen, no)
+AC_PATH_PROG(GAPI_CODEGEN, [gapi2-codegen], [no])
 if test "x$GAPI_CODEGEN" = "xno"; then
 	AC_MSG_CHECKING(for gapi2_codegen.exe)
 	GAPI_CODEGEN=`which gapi2_codegen.exe 2> /dev/null`
@@ -136,8 +136,8 @@ fi
 AC_SUBST(GAPI_CODEGEN)
 
 dnl Check for monodoc
-AC_PATH_PROG(MDASSEMBLER, mdassembler, no)
-AC_PATH_PROG(MONODOCER, monodocer, no)
+AC_PATH_PROG(MDASSEMBLER, [mdassembler], [no])
+AC_PATH_PROG(MONODOCER, [monodocer], [no])
 if test "x$MONODOCER" = "xno" -o "x$MDASSEMBLER" = "xno"; then
 	enable_monodoc=no
 	doc_sources_dir=
