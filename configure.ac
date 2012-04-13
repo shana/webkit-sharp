@@ -34,7 +34,6 @@ fi
 
 dnl Check for Mono
 PKG_CHECK_MODULES(MONO_DEPENDENCY, mono >= 1.0, has_mono=true, has_mono=false)
-PKG_CHECK_MODULES(MONO_DEPENDENCY, mint >= 1.0, has_mint=true, has_mint=false)
 
 if test "x$has_mono" = "xtrue"; then
 	if test `uname -s` = "Darwin"; then
@@ -44,7 +43,7 @@ if test "x$has_mono" = "xtrue"; then
 		LIB_SUFFIX=.dylib
 	else
 		AC_PATH_PROG(RUNTIME, [mono], [no])
-		AC_PATH_PROG(CSC, [mcs], [no])
+		AC_PATH_PROG(CSC, [dmcs], [no])
 		LIB_PREFIX=.so
 		LIB_SUFFIX=
 	fi
