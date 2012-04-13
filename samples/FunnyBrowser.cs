@@ -149,9 +149,7 @@ namespace FunnyBrowser
 			webview.HoveringOverLink += new HoveringOverLinkHandler (OnHoveringOverLink);
 			webview.LoadCommitted += new LoadCommittedHandler (OnLoadCommitted);
 			webview.LoadFinished += new LoadFinishedHandler (OnLoadFinished);
-			webview.LoadStatusChanged += delegate {
-				Console.WriteLine (args.Status);
-			};
+			webview.LoadStatusChanged += (o, args) => Console.WriteLine (args.Status);
 
 		}
 
