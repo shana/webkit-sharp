@@ -244,15 +244,15 @@ namespace Dom
 		private void OnHoveringOverLink (object o, HoveringOverLinkArgs args)
 		{
 			statusbar.Pop (1);
-			if (args.Uri != null) {
-				statusbar.Push (1, args.Uri);
+			if (args.Link != null) {
+				statusbar.Push (1, args.Link);
 			}
 		}
 
 		private void OnLoadCommitted (object o, LoadCommittedArgs args)
 		{
-			action_back.Sensitive = webview.CanGoBack ();
-			action_forward.Sensitive = webview.CanGoForward ();
+			action_back.Sensitive = webview.CanGoBack;
+			action_forward.Sensitive = webview.CanGoForward;
 
 //			uri_entry.Text = args.Frame.Uri;
 		}

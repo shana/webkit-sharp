@@ -1,4 +1,4 @@
-SUBDIRS = dom
+SUBDIRS =
 
 TARGETS = \
 	funnybrowser.exe
