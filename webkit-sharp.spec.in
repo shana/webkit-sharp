@@ -1,7 +1,7 @@
 Name:           webkit-sharp
 Url:            http://www.go-mono.org/
-BuildRequires:  gtk-sharp2 gtk-sharp2-gapi libwebkit-devel mono-devel monodoc-core
-Requires:       libwebkit => 1.1.15 gtk-sharp2
+BuildRequires:  gtk-sharp2 gtk-sharp2-gapi soup-sharp libwebkit-devel mono-devel monodoc-core
+Requires:       libwebkit => 1.2.5 gtk-sharp2
 License:        X11/MIT
 Group:          Development/Libraries/Other
 Summary:        WebKit bindings for Mono
@@ -40,6 +40,9 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_prefix}/lib/pkgconfig/webkit-sharp-1.0.pc
 
 %changelog
+* Wed Apr 01 2011 shana@spoiledcat.net
+- Update to libwebkit 1.2.5
+
 * Wed Oct 08 2009 shana@jitted.com
 - Update to libwebkit 1.1.15
 

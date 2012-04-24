@@ -49,12 +49,12 @@ $(API): $(srcdir)/$(RAW_API) $(srcdir)/$(METADATA)
 	$(GAPI_FIXUP) --api=$(srcdir)/$(API) --metadata=$(srcdir)/$(METADATA)
 
 generated-stamp: $(API)
-	 $(GAPI_CODEGEN) --generate $(srcdir)/$(API) $(GTK_SHARP_CFLAGS) \
+	 $(GAPI_CODEGEN) --generate $(srcdir)/$(API) $(GTK_SHARP_CFLAGS) $(SOUP_SHARP_CFLAGS) \
 	 	--outdir=generated --customdir=$(srcdir) \
 	 	--assembly-name=$(ASSEMBLY_NAME) && touch generated-stamp
 
 $(ASSEMBLY_NAME).dll: $(build_sources) generated-stamp
-	$(CSC) -nowarn:169 -unsafe -target:library $(GTK_SHARP_LIBS) \
+	$(CSC) -nowarn:169 -unsafe -target:library $(GTK_SHARP_LIBS) $(SOUP_SHARP_LIBS) \
 		$(build_sources) generated/*.cs -out:$(ASSEMBLY_NAME).dll
 
 install-data-local:

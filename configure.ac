@@ -34,7 +34,6 @@ fi
 
 dnl Check for Mono
 PKG_CHECK_MODULES(MONO_DEPENDENCY, mono >= 1.0, has_mono=true, has_mono=false)
-PKG_CHECK_MODULES(MONO_DEPENDENCY, mint >= 1.0, has_mint=true, has_mint=false)
 
 if test "x$has_mono" = "xtrue"; then
 	if test `uname -s` = "Darwin"; then
@@ -44,7 +43,7 @@ if test "x$has_mono" = "xtrue"; then
 		LIB_SUFFIX=.dylib
 	else
 		AC_PATH_PROG(RUNTIME, [mono], [no])
-		AC_PATH_PROG(CSC, [mcs], [no])
+		AC_PATH_PROG(CSC, [dmcs], [no])
 		LIB_PREFIX=.so
 		LIB_SUFFIX=
 	fi
@@ -97,6 +96,13 @@ PKG_CHECK_MODULES(WEBKIT, webkit-1.0 >= 1.1.15)
 AC_SUBST(WEBKIT_LIBS)
 webkit_prefix=`pkg-config --variable=prefix webkit-1.0`
 AC_SUBST(webkit_prefix)
+
+dnl Check for soup-sharp
+PKG_CHECK_MODULES(SOUP_SHARP, soup-sharp)
+AC_SUBST(SOUP_SHARP_CFLAGS)
+AC_SUBST(SOUP_SHARP_LIBS)
+soupsharp_prefix=`pkg-config --variable=prefix soup-sharp`
+AC_SUBST(soupsharp_prefix)
 
 dnl Check for gapi
 AC_PATH_PROG(GAPI_PARSER, [gapi2-parser], [no])
@@ -155,6 +161,7 @@ AC_CONFIG_FILES([
 	webkit-sharp.spec
 	doc/Makefile
 	samples/Makefile
+	samples/dom/Makefile
 	sources/Makefile
 	sources/AssemblyInfo.cs
 	sources/webkit-sharp-1.0.pc:sources/webkit-sharp.pc.in
