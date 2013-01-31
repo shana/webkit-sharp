@@ -95,7 +95,7 @@ namespace Dom
 			vbox = new Gtk.VBox (false, 1);
 			vbox.PackStart (toolbar, false, false, 0);
 			vbox.PackStart (exprbar, false, false, 0);
-			vbox.PackStart (scroll);
+			vbox.PackStart (scroll, true, true, 0);
 			//vbox.PackStart (findbar, false, false, 0);
 			vbox.PackEnd (statusbar, false, true, 0);
 
@@ -176,25 +176,25 @@ namespace Dom
 			webview.TitleChanged += new TitleChangedHandler (OnTitleChanged);
 			webview.HoveringOverLink += new HoveringOverLinkHandler (OnHoveringOverLink);
 
-			webview.LoadStatusChanged += delegate {
-/*
-				Console.WriteLine (webview.LoadStatus);
-				IntPtr raw_ret = webkit_web_view_get_main_frame(webview.Handle);
-				Console.WriteLine ("0x{0:x}", (int)raw_ret);
-				GLib.ObjectManager.RegisterType (raw_ret, typeof (WebKit.WebFrame));
-				WebKit.WebFrame ret = GLib.Object.GetObject(raw_ret) as WebKit.WebFrame;
-				Console.WriteLine (ret);
-*/
+			webview.LoadProgressChanged += delegate {
 
 				Console.WriteLine (webview.LoadStatus);
+//				IntPtr raw_ret = webkit_web_view_get_main_frame(webview.Handle);
+//				Console.WriteLine ("0x{0:x}", (int)raw_ret);
+//				GLib.ObjectManager.RegisterType (raw_ret, typeof (WebKit.WebFrame));
+//				WebKit.WebFrame ret = GLib.Object.GetObject(raw_ret) as WebKit.WebFrame;
+//				Console.WriteLine (ret);
+
+
+//				Console.WriteLine (webview.LoadStatus);
 				WebFrame frame = webview.MainFrame;
 				Console.WriteLine (frame);
 				if (frame != null)
 					Console.WriteLine (frame.Uri);
-//				if (webview.LoadStatus == LoadStatus.committed) {
+				if (webview.LoadStatus == LoadStatus.Committed) {
 					if (frame != null && !String.IsNullOrEmpty (frame.Uri))
 						uri_entry.Text = frame.Uri;
-//				}
+				}
 
 			};
 		}

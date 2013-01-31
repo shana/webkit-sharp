@@ -12,12 +12,12 @@ assembly=$(ASSEMBLY_NAME).dll
 
 CLEANFILES = $(TARGETS) $(DEBUGS) $(assembly)
 
-references=-r:../sources/$(assembly) -pkg:gtk-sharp-2.0
+references=-r:../out/$(assembly) -pkg:gtk-sharp-3.0
 
 all: $(TARGETS)
 
-$(assembly): ../sources/$(assembly)
-	cp ../sources/$(ASSEMBLY_NAME).dll $(srcdir)
+$(assembly): ../out/$(assembly)
+	cp ../out/$(ASSEMBLY_NAME).dll $(srcdir)
 
 funnybrowser.exe: $(assembly) $(srcdir)/FunnyBrowser.cs
 	$(CSC)  /out:$@ $(references) $(srcdir)/FunnyBrowser.cs

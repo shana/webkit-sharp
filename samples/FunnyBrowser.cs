@@ -93,7 +93,7 @@ namespace FunnyBrowser
 
 			vbox = new Gtk.VBox (false, 1);
 			vbox.PackStart (toolbar, false, false, 0);
-			vbox.PackStart (scroll);
+			vbox.PackStart (scroll, true, true, 0);
 			//vbox.PackStart (findbar, false, false, 0);
 			vbox.PackEnd (statusbar, false, true, 0);
 
@@ -149,8 +149,8 @@ namespace FunnyBrowser
 			webview.HoveringOverLink += new HoveringOverLinkHandler (OnHoveringOverLink);
 			webview.LoadCommitted += new LoadCommittedHandler (OnLoadCommitted);
 			webview.LoadFinished += new LoadFinishedHandler (OnLoadFinished);
-			webview.LoadStatusChanged += delegate {
-				Console.WriteLine (args.Status);
+			webview.LoadProgressChanged += (o, args) => {
+				Console.WriteLine ("{0} {1}", args.Progress, webview.LoadStatus);
 			};
 
 		}

@@ -48,3 +48,9 @@ sources/webkit-sharp.dll
 sources/webkit-sharp.dll.config
 stamp-h
 webkit-sharp.spec
+generated-stamp
+generated/
+out/webkit-sharp.dll
+samples/dom/Makefile
+samples/dom/Makefile.in
+webkit-sharp-3.0.pc

@@ -1,3 +1,0 @@
-<configuration>
-  <dllmap dll="webkit-1.0" target="webkit-1.0@LIB_PREFIX@.2@LIB_SUFFIX@"/>
-</configuration>

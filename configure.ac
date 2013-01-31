@@ -1,4 +1,4 @@
-AC_INIT([webkit-sharp], [0.3])
+AC_INIT([webkit-sharp], [1.10.0])
 AC_CONFIG_SRCDIR([README])
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE
@@ -6,16 +6,17 @@ AM_MAINTAINER_MODE
 AC_PROG_INSTALL
 
 dnl Package settings
-ASSEMBLY_NAME=$PACKAGE
-ASSEMBLY_VERSION="1.1.15.0"
+ASSEMBLY_COMPANY=""
+ASSEMBLY_COPYRIGHT="2012 Andreia Gaita"
+ASSEMBLY_DESCRIPTION="WebKit-3.0 bindings for Mono"
+ASSEMBLY_NAME="webkit-sharp"
 ASSEMBLY_NAMESPACE="WebKit"
+ASSEMBLY_PC="webkit-sharp-3.0"
 ASSEMBLY_SHORTNAME="webkit"
 ASSEMBLY_TITLE="WebKit#"
-ASSEMBLY_DESCRIPTION="WebKit bindings for Mono"
-ASSEMBLY_COMPANY="Novell, Inc."
-ASSEMBLY_COPYRIGHT="2008, 2009 Novell, Inc."
-ASSEMBLY_PC=$ASSEMBLY_NAME-1.0
-						 
+ASSEMBLY_VERSION="1.10.0"
+AC_SUBST([ACLOCAL_AMFLAGS], ["-I m4 \${ACLOCAL_FLAGS}"])
+
 AC_SUBST(ASSEMBLY_NAME)
 AC_SUBST(ASSEMBLY_VERSION)
 AC_SUBST(ASSEMBLY_NAMESPACE)
@@ -34,35 +35,20 @@ fi
 
 dnl Check for Mono
 PKG_CHECK_MODULES(MONO_DEPENDENCY, mono >= 1.0, has_mono=true, has_mono=false)
-PKG_CHECK_MODULES(MONO_DEPENDENCY, mint >= 1.0, has_mint=true, has_mint=false)
 
 if test "x$has_mono" = "xtrue"; then
-	if test `uname -s` = "Darwin"; then
-		AC_PATH_PROG(RUNTIME, mono, no)
-		AC_PATH_PROG(CSC, mcs, no)
+1	AC_PATH_PROG(RUNTIME, mono, no)
+	AC_PATH_PROG(CSC, gmcs, no)
+	LIB_PREFIX=.so
+	LIB_SUFFIX=
+else
+	AC_PATH_PROG(CSC, csc.exe, no)
+	if test x$CSC = "xno"; then
+		AC_MSG_ERROR([You need to install either mono or .Net])
+	else
+		RUNTIME=
 		LIB_PREFIX=
 		LIB_SUFFIX=.dylib
-	else
-		AC_PATH_PROG(RUNTIME, mono, no)
-		AC_PATH_PROG(CSC, mcs, no)
-		LIB_PREFIX=.so
-		LIB_SUFFIX=
-	fi
-else
-	if test "x$has_mint" = "xtrue"; then
-		AC_PATH_PROG(RUNTIME, mint, no)
-		AC_PATH_PROG(CSC, mcs, no)
-		LIB_PREFIX=.so
-		LIB_SUFFIX=
-	else
-		AC_PATH_PROG(CSC, csc.exe, no)
-		if test x$CSC = "xno"; then
-			AC_MSG_ERROR([You need to install either mono or .Net])
-		else
-			RUNTIME=
-			LIB_PREFIX=
-			LIB_SUFFIX=.dylib
-		fi
 	fi
 fi
 
@@ -86,49 +72,43 @@ AC_SUBST(LIB_PREFIX)
 AC_SUBST(LIB_SUFFIX)
 
 dnl Check for gtk-sharp
-PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0 >= 1.9.0)
+PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-3.0)
 AC_SUBST(GTK_SHARP_CFLAGS)
 AC_SUBST(GTK_SHARP_LIBS)
-gtksharp_prefix=`pkg-config --variable=prefix gtk-sharp-2.0`
+gtksharp_prefix=`pkg-config --variable=prefix gtk-sharp-3.0`
 AC_SUBST(gtksharp_prefix)
 
-dnl Check for WebKit
-PKG_CHECK_MODULES(WEBKIT, webkit-1.0 >= 1.1.15)
-AC_SUBST(WEBKIT_LIBS)
-webkit_prefix=`pkg-config --variable=prefix webkit-1.0`
-AC_SUBST(webkit_prefix)
-
 dnl Check for gapi
-AC_PATH_PROG(GAPI_PARSER, gapi2-parser, no)
+AC_PATH_PROG(GAPI_PARSER, gapi3-parser, no)
 if test "x$GAPI_PARSER" = "xno"; then
-	AC_MSG_CHECKING(for gapi2-parser.exe)
-	GAPI_PARSER=`which gapi2-parser.exe 2> /dev/null`
+	AC_MSG_CHECKING(for gapi3-parser.exe)
+	GAPI_PARSER=`which gapi3-parser.exe 2> /dev/null`
 	if test "x$GAPI_PARSER" = "xno" ; then
-		AC_MSG_ERROR(['gapi2_parser'/'gapi2-parser.exe' not found.])
+		AC_MSG_ERROR(['gapi3_parser'/'gapi3-parser.exe' not found.])
 	fi
 	AC_MSG_RESULT($GAPI_PARSER)
 	GAPI_PARSER="$MONO $GAPI_PARSER"
 fi
 AC_SUBST(GAPI_PARSER)
 
-AC_PATH_PROG(GAPI_FIXUP, gapi2-fixup, no)
+AC_PATH_PROG(GAPI_FIXUP, gapi3-fixup, no)
 if test "x$GAPI_FIXUP" = "xno"; then
-	AC_MSG_CHECKING(for gapi2-fixup.exe)
-	GAPI_FIXUP=`which gapi2-fixup.exe 2> /dev/null`
+	AC_MSG_CHECKING(for gapi3-fixup.exe)
+	GAPI_FIXUP=`which gapi3-fixup.exe 2> /dev/null`
 	if test "x$GAPI_FIXUP" = "xno" ; then
-		AC_MSG_ERROR(['gapi2_fixup'/'gapi2-fixup.exe' not found.])
+		AC_MSG_ERROR(['gapi3_fixup'/'gapi3-fixup.exe' not found.])
 	fi
 	AC_MSG_RESULT($GAPI_FIXUP)
 	GAPI_FIXUP="$MONO $GAPI_FIXUP"
 fi
 AC_SUBST(GAPI_FIXUP)
 
-AC_PATH_PROG(GAPI_CODEGEN, gapi2-codegen, no)
+AC_PATH_PROG(GAPI_CODEGEN, gapi3-codegen, no)
 if test "x$GAPI_CODEGEN" = "xno"; then
-	AC_MSG_CHECKING(for gapi2_codegen.exe)
-	GAPI_CODEGEN=`which gapi2_codegen.exe 2> /dev/null`
+	AC_MSG_CHECKING(for gapi3_codegen.exe)
+	GAPI_CODEGEN=`which gapi3_codegen.exe 2> /dev/null`
 	if test "x$GAPI_CODEGEN" = "xno" ; then
-		AC_MSG_ERROR(['gapi2-codegen'/'gapi2_codegen.exe' not found.])
+		AC_MSG_ERROR(['gapi3-codegen'/'gapi3_codegen.exe' not found.])
 	fi
 	AC_MSG_RESULT([$GAPI_CODEGEN])
 	GAPI_CODEGEN="$MONO $GAPI_CODEGEN"
@@ -149,17 +129,20 @@ AC_SUBST(MDASSEMBLER)
 AC_SUBST(MONODOCER)
 
 AM_CONDITIONAL(ENABLE_MONODOC, test "x$enable_monodoc" = "xyes")
+dnl Check for WebKit
+PKG_CHECK_MODULES(WEBKIT, webkitgtk-3.0)
+webkit_prefix=/usr
+AC_SUBST(webkit_prefix)
+
+
 
 AC_CONFIG_FILES([
 	Makefile
-	webkit-sharp.spec
+	sources/AssemblyInfo.cs
+	webkit-sharp-3.0.pc
 	doc/Makefile
 	samples/Makefile
 	samples/dom/Makefile
-	sources/Makefile
-	sources/AssemblyInfo.cs
-	sources/webkit-sharp-1.0.pc:sources/webkit-sharp.pc.in
-	sources/webkit-sharp.dll.config
 ])
 AC_CONFIG_COMMANDS([default],[[ echo timestamp > stamp-h ]],[[]])
 AC_OUTPUT
@@ -170,6 +153,5 @@ echo "---------------------"
 echo ""
 echo "   * Installation prefix: $prefix"
 echo "   * compiler: $CSC"
-echo "   * Documentation: $enable_monodoc ($MONODOC)"
+echo "   * Documentation:  ($MONODOC)"
 echo ""
-

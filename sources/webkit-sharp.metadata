@@ -1,16 +1,4 @@
 <?xml version="1.0"?>
-<!-- TODO: navigation-requested -->
 <metadata>
-
-	<!-- Add missing signal in WebView -->
-	<add-node path="/api/namespace/object[@cname='WebKitWebView']">
-		<signal name="LoadStatusChanged" cname="notify::load-status" when="LAST">
-			<return-type type="void" />
-			<parameters>
-				<parameter type="WebKitWebView*" name="webview" />
-				<parameter type="WebKitLoadStatus" name="status" />
-			</parameters>
-                </signal>
-	</add-node>
 </metadata>
 
