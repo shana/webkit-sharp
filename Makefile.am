@@ -1,51 +1,5 @@
-SUBDIRS=doc
+SUBDIRS = sources doc
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = $(ASSEMBLY_PC).pc
+EXTRA_DIST = webkit-sharp-3.0.pc.in
+DISTCLEANFILES = webkit-sharp-3.0.pc
 
-RAW_API=sources/$(ASSEMBLY_NAME)-api.raw
-API=sources/$(ASSEMBLY_NAME)-api.xml
-METADATA=sources/$(ASSEMBLY_NAME).metadata
-DLL=out/$(ASSEMBLY_NAME).dll
-DLLMAP=out/$(ASSEMBLY_NAME).dll.config
-
-sources = 
-
-build_sources = sources/AssemblyInfo.cs $(sources)
-
-CLEANFILES = $(DLL) generated-stamp generated/*.cs $(API)
-
-DISTCLEANFILES= sources/AssemblyInfo.cs $(ASSEMBLY_PC).pc $(DLLMAP)
-
-noinst_DATA = $(DLL)
-
-EXTRA_DIST = $(RAW_API) $(sources) $(METADATA) \
-	sources/AssemblyInfo.cs.in \
-	sources/$(ASSEMBLY_NAME).dll.config.in \
-	sources/$(ASSEMBLY_NAME)-sources.xml \
-	sources/$(ASSEMBLY_NAME).snk \
-	$(ASSEMBLY_NAME).pc.in
-
-all: generated-stamp $(ASSEMBLY)
-
-$(API): $(srcdir)/$(RAW_API) $(srcdir)/$(METADATA)
-	cp $(srcdir)/$(RAW_API) $(API)
-	chmod u+w $(API)
-	$(GAPI_FIXUP) --api=$(srcdir)/$(API) --metadata=$(srcdir)/$(METADATA)
-
-generated-stamp: $(API)
-	 $(GAPI_CODEGEN) --generate $(srcdir)/$(API) $(GTK_SHARP_CFLAGS) \
-		--outdir=generated \
-	 	--assembly-name=$(ASSEMBLY_NAME) && touch generated-stamp
-
-$(DLL): $(build_sources) generated-stamp
-	$(CSC) -nowarn:169 -unsafe -target:library $(GTK_SHARP_LIBS) \
-		$(build_sources)  generated/*.cs -out:$(DLL)
-
-install-data-local:
-	echo "$(GACUTIL) /i $(DLL) /f $(GACUTIL_FLAGS)";  \
-        $(GACUTIL) /i $(DLL) /f $(GACUTIL_FLAGS) || exit 1;
-
-uninstall-local:
-	echo "$(GACUTIL) /u $(ASSEMBLY_NAME) $(GACUTIL_FLAGS)"; \
-        $(GACUTIL) /u $(ASSEMBLY_NAME) $(GACUTIL_FLAGS) || exit 1;

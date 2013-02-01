@@ -138,11 +138,10 @@ AC_SUBST(webkit_prefix)
 
 AC_CONFIG_FILES([
 	Makefile
+	sources/Makefile
 	sources/AssemblyInfo.cs
 	webkit-sharp-3.0.pc
 	doc/Makefile
-	samples/Makefile
-	samples/dom/Makefile
 ])
 AC_CONFIG_COMMANDS([default],[[ echo timestamp > stamp-h ]],[[]])
 AC_OUTPUT
