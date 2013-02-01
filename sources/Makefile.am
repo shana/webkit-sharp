@@ -4,8 +4,6 @@ METADATA = $(ASSEMBLY_NAME).metadata
 DLL = $(top_srcdir)/out/$(ASSEMBLY_NAME).dll
 DLLMAP = $(top_srcdir)/out/$(ASSEMBLY_NAME).dll.config
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = $(PCFILE)
 
 sources = 
 

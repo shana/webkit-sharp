@@ -129,6 +129,7 @@ AC_SUBST(MDASSEMBLER)
 AC_SUBST(MONODOCER)
 
 AM_CONDITIONAL(ENABLE_MONODOC, test "x$enable_monodoc" = "xyes")
+
 dnl Check for WebKit
 PKG_CHECK_MODULES(WEBKIT, webkitgtk-3.0)
 webkit_prefix=/usr
@@ -142,6 +143,8 @@ AC_CONFIG_FILES([
 	sources/AssemblyInfo.cs
 	webkit-sharp-3.0.pc
 	doc/Makefile
+	samples/Makefile
+	samples/dom/Makefile
 ])
 AC_CONFIG_COMMANDS([default],[[ echo timestamp > stamp-h ]],[[]])
 AC_OUTPUT
