@@ -43,7 +43,7 @@ if test "x$has_mono" = "xtrue"; then
 		LIB_SUFFIX=.dylib
 	else
 		AC_PATH_PROG(RUNTIME, [mono], [no])
-		AC_PATH_PROG(CSC, [dmcs], [no])
+		AC_PATH_PROG(CSC, [mcs], [no])
 		LIB_PREFIX=.so
 		LIB_SUFFIX=
 	fi
