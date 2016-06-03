@@ -43,7 +43,7 @@ if test "x$has_mono" = "xtrue"; then
 		LIB_SUFFIX=.dylib
 	else
 		AC_PATH_PROG(RUNTIME, [mono], [no])
-		AC_PATH_PROG(CSC, [dmcs], [no])
+		AC_PATH_PROG(CSC, [mcs], [no])
 		LIB_PREFIX=.so
 		LIB_SUFFIX=
 	fi
@@ -97,11 +97,11 @@ AC_SUBST(WEBKIT_LIBS)
 webkit_prefix=`pkg-config --variable=prefix webkit-1.0`
 AC_SUBST(webkit_prefix)
 
-dnl Check for soup-sharp
-PKG_CHECK_MODULES(SOUP_SHARP, soup-sharp)
+dnl Check for soup-sharp-2.4
+PKG_CHECK_MODULES(SOUP_SHARP, soup-sharp-2.4)
 AC_SUBST(SOUP_SHARP_CFLAGS)
 AC_SUBST(SOUP_SHARP_LIBS)
-soupsharp_prefix=`pkg-config --variable=prefix soup-sharp`
+soupsharp_prefix=`pkg-config --variable=prefix soup-sharp-2.4`
 AC_SUBST(soupsharp_prefix)
 
 dnl Check for gapi
